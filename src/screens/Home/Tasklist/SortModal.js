@@ -1,0 +1,148 @@
+import React, { useState } from 'react'
+import { View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import RNRadioButton from 'vendors/radio-button';
+import { Styles, Colors } from 'themes'
+import { Text } from 'components/Text'
+import Spacer from 'components/Spacer'
+import Modal from "react-native-modal"
+import ExitButton from 'components/Buttons/ExitButton'
+
+export default function body({ handleSortModalOpen, isModalOpen }) {
+    // const [showModal, setModalVisible] = useState(false)
+    const [sortActive, setSortActive] = useState(0)
+    const [filters, setFilter] = useState([
+        {
+            id: 0,
+            label: 'Area',
+            value: 'Area'
+        },
+        {
+            id: 1,
+            label: 'Unit',
+            value: 'Unit'
+        },
+        {
+            id: 2,
+            label: 'Zone',
+            value: 'Zone'
+        },
+        {
+            id: 3,
+            label: 'Work Category',
+            value: 'Work Category'
+        },
+        {
+            id: 4,
+            label: 'Tag No',
+            value: 'Tag No'
+        },
+        {
+            id: 5,
+            label: '100 to 0 Progress',
+            value: '100 to 0 Progress'
+        },
+        {
+            id: 6,
+            label: '0 to 100 Progress',
+            value: '0 to 100 Progress'
+        },
+    ])
+    const [activeFilter, setActiveFilter] = useState(0)
+
+    // const toggleModal = () => {
+    //     setModalVisible(!showModal)
+    // }
+
+    const sortToggle = () => {
+        return (
+            <View style={[Styles.row, styles.toggleSortContainer]}>
+                <TouchableOpacity
+                    style={[styles.toggleSortLeftContainer, sortActive == 0 ? { backgroundColor: Colors.primary } : { backgroundColor: Colors.white }]}
+                    onPress={() => setSortActive(0)}>
+                    <Text style={[Styles.textMd, sortActive == 0 ? Styles.textWhite : Styles.textSecondary]}>A to Z</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.toggleSortRightContainer, sortActive == 1 ? { backgroundColor: Colors.primary } : { backgroundColor: Colors.white }]}
+                    onPress={() => setSortActive(1)}>
+                    <Text style={[Styles.textMd, sortActive == 1 ? Styles.textWhite : Styles.textSecondary]}>Z to A</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    const renderFilters = () => {
+        // console.log(activeFilter)
+        return (
+            <View>
+                <RNRadioButton
+                    box={false}
+                    activeBorderColor={Colors.greyLight}
+                    boxStyle={{ paddingVertical: 5, borderColor: Colors.greyLight }}
+                    activeColor={Colors.primary}
+                    textColor={Colors.secondary}
+                    circleSize={25}
+                    data={filters}
+                    spacerWidth={20}
+                    selectedBtn={(e) => setActiveFilter(e)}
+                />
+            </View>
+        )
+    }
+
+    const modalBody = () => {
+        return (
+            <View style={Styles.bottomModal}>
+                <ScrollView>
+                    <View style={[Styles.col, Styles.paddingMd]}>
+                        <View style={Styles.alignEnd}>
+                            <ExitButton handleBackPressed={() => handleSortModalOpen(false)} />
+                        </View>
+                        <Spacer size="sm" />
+                        <View style={[Styles.col, Styles.paddingHorizontalLg]}>
+                            <Text style={[Styles.textBold, Styles.textXl]}>Sort by</Text>
+                            <Spacer size="sm" />
+                            {sortToggle()}
+                            <Spacer size="sm" />
+                            {renderFilters()}
+                        </View>
+                    </View>
+                </ScrollView>
+            </View>
+        )
+    }
+
+
+    return (
+        <Modal isVisible={isModalOpen}
+            onSwipeComplete={handleSortModalOpen}
+            swipeDirection={['down']}
+            style={Styles.bottomModalContainer}
+            onBackdropPress={() => handleSortModalOpen(false)}>
+            {modalBody()}
+        </Modal>
+    )
+}
+
+const toggleSortStyles = {
+    borderColor: Colors.greyLight,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
+}
+
+const styles = StyleSheet.create({
+    toggleSortContainer: {},
+    toggleSortLeftContainer: {
+        ...toggleSortStyles,
+        borderLeftWidth: 0.5,
+        borderBottomLeftRadius: 20,
+        borderTopLeftRadius: 20
+    },
+    toggleSortRightContainer: {
+        ...toggleSortStyles,
+        borderRightWidth: 0.5,
+        borderBottomRightRadius: 20,
+        borderTopRightRadius: 20
+    }
+})

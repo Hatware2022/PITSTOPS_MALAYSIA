@@ -1,0 +1,62 @@
+[
+    {
+        "id": 0,
+        "name": "Task 1",
+        "start": "29-JUN-2022 16:30",
+        "end": "30-JUN-2022 24:30",
+        "progress": 100,
+        "subTasks": []
+    },
+    {
+        "id": 1,
+        "name": "Task 2",
+        "start": "29-JUN-2022 16:30",
+        "end": "30-JUN-2022 24:30",
+        "progress": 50,
+        "subTasks": []
+    },
+    {
+        "id": 2,
+        "name": "Task 3",
+        "start": "29-JUN-2022 16:30",
+        "end": "30-JUN-2022 24:30",
+        "progress": 50,
+        "subTasks": []
+    },
+    {
+        "id": 3,
+        "name": "Task 4",
+        "start": "29-JUN-2022 16:30",
+        "end": "30-JUN-2022 24:30",
+        "progress": 70,
+        "subTasks": [
+            {
+                "id": 0,
+                "name": "SubTask 1",
+                "desc": "GroupA"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Task 5",
+        "start": "29-JUN-2022 16:30",
+        "end": "30-JUN-2022 24:30",
+        "progress": 70,
+        "subTasks": [
+            {
+                "id": 0,
+                "name": "SubTask 1",
+                "desc": "GroupA"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Task 6",
+        "start": "29-JUN-2022 16:30",
+        "end": "30-JUN-2022 24:30",
+        "progress": 50,
+        "subTasks": []
+    },
+]
